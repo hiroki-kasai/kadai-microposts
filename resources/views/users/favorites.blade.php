@@ -15,16 +15,8 @@
                         <p class="mb-0">{!! nl2br(e($favorite->content)) !!}</p>
                     </div>
                     <div class='row'>
-                        <div class='col-sm-1'>
-                        @if (Auth::id() == $favorite->user_id)
-                            {{-- 投稿削除ボタンのフォーム --}}
-                            {!! Form::open(['route' => ['microposts.destroy', $favorite->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-                        @endif
-                        </div>
-                        <div class='col-sm-1'>        
-                        @if (Auth::user()->is_favorite($favorite->id))
+                        <div class='col-sm-2'>
+                         @if (Auth::user()->is_favorite($favorite->id))
                                 {{-- お気に入り解除ボタンのフォーム --}}
                                 {!! Form::open(['route' => ['user.unfavorite', $favorite->id], 'method' => 'delete']) !!}
                                     {!! Form::submit('Unfavorite', ['class' => "btn btn-info btn-sm"]) !!}
@@ -34,6 +26,15 @@
                                 {!! Form::open(['route' => ['user.favorite', $favorite->id]]) !!}
                                     {!! Form::submit('Favorite', ['class' => "btn btn-success btn-sm"]) !!}
                                 {!! Form::close() !!}
+                        @endif
+                        </div>
+                        <div class='offset-sm-8 col-sm-2'>        
+                       
+                        @if (Auth::id() == $favorite->user_id)
+                            {{-- 投稿削除ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['microposts.destroy', $favorite->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
                         @endif
                         </div>
                     </div>

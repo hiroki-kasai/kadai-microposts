@@ -15,15 +15,7 @@
                         <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
                     </div>
                     <div class='row'>
-                        <div class='col-sm-1'>
-                        @if (Auth::id() == $micropost->user_id)
-                            {{-- 投稿削除ボタンのフォーム --}}
-                            {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-                        @endif
-                        </div>
-                        <div class='col-sm-1'>
+                        <div class='col-sm-2'>
                         @if (Auth::user()->is_favorite($micropost->id))
                                 {{-- お気に入り解除ボタンのフォーム --}}
                                 {!! Form::open(['route' => ['user.unfavorite', $micropost->id], 'method' => 'delete']) !!}
@@ -34,6 +26,14 @@
                                 {!! Form::open(['route' => ['user.favorite', $micropost->id]]) !!}
                                     {!! Form::submit('Favorite', ['class' => "btn btn-success btn-sm"]) !!}
                                 {!! Form::close() !!}
+                        @endif
+                        </div>
+                        <div class='offset-sm-8 col-sm-2'>
+                        @if (Auth::id() == $micropost->user_id)
+                            {{-- 投稿削除ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
                         @endif
                         </div>
                     </div>
